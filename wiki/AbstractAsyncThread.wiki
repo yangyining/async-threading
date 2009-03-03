@@ -30,7 +30,7 @@ package {
 		protected var iterationCount:int = 20000;
 		protected var binaryData:ByteArray = new ByteArray();
 		
-		public function RealTimeWorkerBee() {
+		public function DataBuilderThread() {
 			super();
 			super.priority = super.RUN_LEVEL_REAL_TIME;
 			super.start();
@@ -51,4 +51,31 @@ The basic signature is like so:
 
 The AsyncThreading library manages message callbacks with reflection-based mappings. This is very very similar to the methodology used in Fabrication for PureMVC.
 
-For example... if we have a thread class called DataReaderThread
+For example... if we have a thread class called DataReaderThread, we may want to respond to the "realTimeDataReady" message from the DataBuilderThread:
+
+{{{
+package {
+	import com.symantec.premiumServices.asyncThreading.abstract.AbstractAsyncThread;
+	import com.symantec.premiumServices.asyncThreading.interfaces.IAsyncThreadResponder;
+	
+	import flash.utils.ByteArray;
+
+	public class DataReaderThread extends AbstractAsyncThread implements IAsyncThreadResponder {
+		
+		public function DataReaderThread() {
+			super();
+			super.priority = super.RUN_LEVEL_LOW;
+			super.start();
+		}
+		
+		public function execute():void {
+			//
+		}
+
+          	public function respondToRealTimeDataReady(message:IAsyncThreadMessage):void {
+			//
+		}
+		
+	}
+}
+}}}
