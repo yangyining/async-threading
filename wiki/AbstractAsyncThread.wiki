@@ -1,0 +1,48 @@
+#summary The AbstractAsyncThread class is the base class used to create threaded objects within the AsyncThreading library.
+#labels thread,flex,actionscript
+
+= Introduction =
+
+The AbstractAsyncThread class provides the basis for threaded objects within the AsyncThreading library.
+
+However, it is an *abstract* class, in that it must be extended to be used. If it is instantiated directly, it will yield a run time exception. Additionally, the extended class must implement either the IAsyncThreadResponder interface, or implement a class extending the IAsyncThreadResponder interface. The reason for this architectural decision was primarily based on removing dependencies on overrides. Additionally, the type of interface the thread instance uses determines the behavior of the thread - ie: whether or not it is scalable.
+
+
+= Thread Communication =
+
+Threads do not have direct access to eachother, but they *can* dispatch messages to the threading system as a whole. 
+
+==Dispatching Thread Messages==
+
+In this example, the DataBuilderThread is calling 
+`super.sendThreadMessage("realTimeDataReady", binaryData);`
+in its execute() method. presumably, there would be some work done on the data before it is sent.
+
+{{{
+package {
+	import com.symantec.premiumServices.asyncThreading.abstract.AbstractAsyncThread;
+	import com.symantec.premiumServices.asyncThreading.interfaces.IAsyncThreadResponder;
+	
+	import flash.utils.ByteArray;
+
+	public class DataBuilderThread extends AbstractAsyncThread implements IAsyncThreadResponder {
+		
+		protected var iterationCount:int = 20000;
+		protected var binaryData:ByteArray = new ByteArray();
+		
+		public function RealTimeWorkerBee() {
+			super();
+			super.priority = super.RUN_LEVEL_REAL_TIME;
+			super.start();
+		}
+		
+		public function execute():void {
+			super.sendThreadMessage("realTimeDataReady", binaryData);
+		}
+		
+	}
+}
+}}}
+
+The basic signature is like so:
+`super.send("message_name", *);`
