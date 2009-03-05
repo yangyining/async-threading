@@ -1,4 +1,4 @@
-#summary the IAsyncThreadScalableResponder class provides a base method signature for scalable thread objects.
+#summary The IAsyncThreadScalableResponder class provides a base method signature for scalable thread objects.
 
 = Introduction =
 
