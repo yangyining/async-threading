@@ -131,7 +131,7 @@ The basic signature is like so:
 
 ==Receiving Thread Messages==
 
-The AsyncThreading library manages message callbacks with reflection-based mappings. This is very very similar to the methodology used in Fabrication for PureMVC.
+The AsyncThreading library manages message callbacks with reflection-based mappings. This is very similar to the methodology used in Fabrication for PureMVC.
 
 For example... if we have a thread class called DataReaderThread, we may want to respond to the "realTimeDataReady" message from the DataBuilderThread:
 
