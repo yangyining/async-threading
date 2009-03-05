@@ -161,3 +161,5 @@ package {
 	}
 }
 }}}
+
+Incoming thread messages are queued up and executed sequentially immediately before the thread's next execution phase.
