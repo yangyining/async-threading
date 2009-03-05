@@ -7,6 +7,88 @@ The AbstractAsyncThread class provides the basis for threaded objects within the
 
 However, it is an *abstract* class, in that it must be extended to be used. If it is instantiated directly, it will yield a run time exception. Additionally, the extended class must implement either the IAsyncThreadResponder interface, or implement a class extending the IAsyncThreadResponder interface. The reason for this architectural decision was primarily based on removing dependencies on overrides. Additionally, the type of interface the thread instance uses determines the behavior of the thread - ie: whether or not it is scalable.
 
+= Thread Priority Levels =
+
+A thread's priority level is at the most basic level an integer specifying the nth frame for the thread to execute on in a given second.
+
+For example: Flex's default frame rate is 24 frames per second. If you assign a thread a priority value of 8, the thread is going to execute on every 8th frame, or 3 times per second.
+
+The AbstractAsyncThread class provides several statics default values for thread priority:
+{{{
+		public const RUN_LEVEL_REAL_TIME:int
+		public const RUN_LEVEL_HIGH:int = 3;
+		public const RUN_LEVEL_ABOVE_NORMAL:
+		public const RUN_LEVEL_NORMAL:int = 
+		public const RUN_LEVEL_BELOW_NORMAL:
+		public const RUN_LEVEL_LOW:int = 24;
+}}}
+
+== Adjusting the priority ==
+
+
+You can adjust a thread's priority at any point in its lifecycle - even while it is running.
+
+Example:
+
+{{{
+package {
+	import com.symantec.premiumServices.asyncThreading.abstract.AbstractAsyncThread;
+	import com.symantec.premiumServices.asyncThreading.interfaces.IAsyncThreadResponder;
+	
+	public class RealTimeWorkerBee extends AbstractAsyncThread implements IAsyncThreadResponder {
+		
+		public function RealTimeWorkerBee() {
+			super();
+			super.priority = super.RUN_LEVEL_REAL_TIME;
+			super.start();
+		}
+		
+		public function execute():void {
+			//
+		}
+		
+	}
+}
+}}}
+
+The main thing to note in the above example is this line:
+`super.priority = super.RUN_LEVEL_REAL_TIME;`
+
+And here is a more complicated example:
+{{{
+package {
+	import com.symantec.premiumServices.asyncThreading.abstract.AbstractAsyncThread;
+	import com.symantec.premiumServices.asyncThreading.interfaces.IAsyncThreadScalableResponder;
+	
+	public class RealTimeWorkerBee extends AbstractAsyncThread implements IAsyncThreadScalableResponder {
+		
+		public function RealTimeWorkerBee() {
+			super();
+			super.priority = super.RUN_LEVEL_REAL_TIME;
+			super.start();
+		}
+		
+		public function execute():void {
+			//
+		}
+		
+		public function increaseWorkLoad():void {
+			if (super.priority > 1) {
+				super.priority -= 1;
+			}
+		}
+		
+		public function decreaseWorkLoad():void {
+			if (super.priority < 24) {
+				super.priority += 1;
+			}
+		}
+		
+	}
+}
+}}}
+
+In this example, we have a thread object whose priority is directly controlled by how well the application is performing, via the IAsyncThreadScalableResponder API. Cool!
 
 = Thread Communication =
 
