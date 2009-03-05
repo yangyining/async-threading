@@ -17,9 +17,9 @@ The AbstractAsyncThread class provides several statics default values for thread
 {{{
 		public const RUN_LEVEL_REAL_TIME:int = 1;
 		public const RUN_LEVEL_HIGH:int = 3;
-		public const RUN_LEVEL_ABOVE_NORMAL = 6:
+		public const RUN_LEVEL_ABOVE_NORMAL:int = 6:
 		public const RUN_LEVEL_NORMAL:int = 8;
-		public const RUN_LEVEL_BELOW_NORMAL = 12:
+		public const RUN_LEVEL_BELOW_NORMAL:int = 12:
 		public const RUN_LEVEL_LOW:int = 24;
 }}}
 
