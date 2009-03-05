@@ -1,0 +1,13 @@
+#summary the IAsyncThreadScalableResponder class provides a base method signature for scalable thread objects.
+
+= Introduction =
+
+The IAsyncThreadScalableResponder interface extends the IAsyncThreadResponder interface, and offers the following additional method signatures:
+
+{{{
+		function increaseWorkLoad():void;
+		function decreaseWorkLoad():void;
+}}}
+
+
+= Details =
