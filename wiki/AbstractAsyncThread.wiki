@@ -74,13 +74,13 @@ package {
 		
 		public function increaseWorkLoad():void {
 			if (super.priority > 1) {
-				super.priority -= 1;
+				super.priority = super.priority - 1;
 			}
 		}
 		
 		public function decreaseWorkLoad():void {
 			if (super.priority < 24) {
-				super.priority += 1;
+				super.priority = super.priority + 1;
 			}
 		}
 		
