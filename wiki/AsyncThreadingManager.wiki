@@ -3,7 +3,7 @@
 = Introduction =
 AsyncThreadingManager is the singleton manager class which sits in the middle of all of the various components of the AsyncThreading framework.
 
-It has several key features, including the ability to send messages to all all executing threads from outside of the AsyncThreding framework. Additionally, you can terminate all executing threads, as well as shut down the AsyncThreading system as a whole.
+It has several key features, including the ability to send messages to all all executing threads from outside of the AsyncThreading framework. Additionally, you can terminate all executing threads, as well as shut down the AsyncThreading system as a whole.
 
 
 = Public static vars =
