@@ -1,0 +1,47 @@
+#summary AsyncThreadingManager is a singleton manager class which controls the AsyncThreading framework.
+
+= Introduction =
+AsyncThreadingManager is the singleton manager class which sits in the middle of all of the various components of the AsyncThreading framework.
+
+It has several key features, including the ability to send messages to all all executing threads from outside of the AsyncThreding framework. Additionally, you can terminate all executing threads, as well as shut down the AsyncThreading system as a whole.
+
+
+= Public static vars =
+
+== verboseLogging ==
+
+This value defaults to false. 95% of all of the logging in the AsyncThreading framework is controlled by this. 
+
+To enable it, do this:
+
+{{{
+AsyncThreadingManager.getInstance().verboseLogging = true;
+}}}
+
+Unless you have a TraceTarget defined, you are not going to see the logging. That is implemented like so:
+
+{{{
+			public function creationComplete():void {
+				var tracer:TraceTarget = new TraceTarget();
+					tracer.includeTime = true;
+					tracer.includeDate = true;
+					tracer.includeCategory = true;
+					tracer.includeLevel = true;
+					
+				Log.addTarget( tracer );
+				
+				AsyncThreadingManager.verboseLogging = true;
+			}
+}}}
+
+== useDistributedFrameLoading ==
+
+This value defaults to true. When this value is true, the AsyncThreading system load balances thread execution by giving every registered thread a seed which offsets the frame it is executed on.
+
+For example, if you have 3 threads that all have priority settings of `RUN_LEVEL_ABOVE_NORMAL`, or 6, they will all execute on the same frame every time. This could lead to predictable lowpoints in your applications performance. However, if `useDistributedFrameLoading` is enabled (which it is by default), they will be assigned random seeds, which means that they will ultimately execute on different frames from eachother. They will still have a priority of 6 and execute on every 6th frame, but their *start* frames will be different.
+
+This could definitely lead to threads being out of synch with each other, but the prevailing idea is that threads will not be crunching on shared data so this should not be an issue. However, if it does become an issue, you can disable it like so:
+
+{{{
+AsyncThreadingManager.getInstance().useDistributedFrameLoading = false;
+}}}
