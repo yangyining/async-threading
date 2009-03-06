@@ -45,3 +45,31 @@ This could definitely lead to threads being out of synch with each other, but th
 {{{
 AsyncThreadingManager.getInstance().useDistributedFrameLoading = false;
 }}}
+
+= Monitoring Display Objects =
+
+The AsyncThreading system automatically monitors your application's stage reference for framerate. However, we have discovered that nested Flash assets can have their framerates get out of synch with that of the stage.
+
+For example, we had an instance where the stage framerate was reporting as 24fps, but an embedded Flash asset was evaluating at < 18 fps, which made it look choppy (the framerate for the Flash project file was 24fps, just like Flex).
+
+To compensate for this, the AsyncThreading system provides the ability to monitor multiple DisplayObjects outside of the stage reference. 
+
+=== Adding a DisplayObject to be Monitored ===
+
+Example:
+
+{{{
+			public function monitorTestUI():void {
+				AsyncThreadingManager.getInstance().monitorDisplayObject(testUI);
+			}
+}}}
+
+=== Removing a DisplayObject from the Monitoring System ===
+
+Example:
+
+{{{
+			public function stopMonitorTestUI():void {
+				AsyncThreadingManager.getInstance().stopMonitoringDisplayObject(testUI);
+			}
+}}}
