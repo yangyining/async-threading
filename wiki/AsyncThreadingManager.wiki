@@ -16,7 +16,7 @@ This value defaults to false. 95% of all of the logging in the AsyncThreading fr
 To enable it, do this:
 
 {{{
-AsyncThreadingManager.getInstance().verboseLogging = true;
+AsyncThreadingManager.verboseLogging = true;
 }}}
 
 Unless you have a TraceTarget defined, you are not going to see the logging. That is implemented like so:
@@ -44,7 +44,7 @@ For example, if you have 3 threads that all have priority settings of `RUN_LEVEL
 This could definitely lead to threads being out of synch with each other, but the prevailing idea is that threads will not be crunching on shared data so this should not be an issue. However, if it does become an issue, you can disable it like so:
 
 {{{
-AsyncThreadingManager.getInstance().useDistributedFrameLoading = false;
+AsyncThreadingManager.useDistributedFrameLoading = false;
 }}}
 
 = Monitoring Display Objects =
