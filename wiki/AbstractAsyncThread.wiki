@@ -1,5 +1,5 @@
 #summary The AbstractAsyncThread class is the base class used to create threaded objects within the AsyncThreading library.
-#labels thread,flex,actionscript
+#labels Featured
 
 = Introduction =
 
