@@ -1,5 +1,5 @@
 #summary A brief historical overview of the AsyncThreading library, as well as the forward direction we are taking with it.
-#labels Flex,threading,actionscript
+#labels Featured
 
 = Introduction =
 
