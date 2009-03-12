@@ -1,5 +1,5 @@
 #summary AsyncThreadingManager is a singleton manager class which controls the AsyncThreading framework.
-#labels flex,actionscript,thread
+#labels Featured
 
 = Introduction =
 AsyncThreadingManager is the singleton manager class which sits in the middle of all of the various components of the AsyncThreading framework.
