@@ -1,5 +1,5 @@
 #summary The IAsyncThreadScalableResponder class provides a base method signature for scalable thread objects.
-#labels flex,actionscript,thread
+#labels Featured
 
 = Introduction =
 
